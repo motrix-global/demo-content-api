@@ -1,21 +1,11 @@
-import { PrismaClient } from "@prisma/client";
-import express from "express";
+import express from "express"
+import content from "./content"
 
-const prisma = new PrismaClient();
-const app = express();
+const app = express()
 
-app.use(express.json());
-
-app.get("/users", async (req, res) => {
-  const users = await prisma.user.findMany();
-  res.json(users);
-});
-
-app.get("/", async (req, res) => {
-    const content = await prisma.content.findMany();
-    res.json(content);
-  });
+app.use(express.json())
+app.use("/", content)
 
 app.listen(3000, () =>
   console.log("REST API server ready at: http://localhost:3000")
-);
+)
