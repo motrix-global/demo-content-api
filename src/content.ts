@@ -7,12 +7,17 @@ const prisma = new PrismaClient()
 router.get("/", async (req, res) => {
   const content = await prisma.content.findMany({
     include: {
-      revisions: true,
+      revisions: {
+        orderBy: {
+          updatedAt: "desc",
+        },
+      },
     },
     where: {
       deletedAt: null,
     },
   })
+
   res.json(content)
 })
 
@@ -20,6 +25,13 @@ router.get(`/:id`, async (req, res) => {
   const { id } = req.params
   const content = await prisma.content.findFirst({
     where: { id: Number(id) },
+    include: {
+      revisions: {
+        orderBy: {
+          updatedAt: "desc",
+        },
+      },
+    },
   })
 
   res.json(content)
@@ -50,6 +62,9 @@ router.put("/:id", async (req, res) => {
   try {
     const content = await prisma.content.update({
       where: { id: Number(id) },
+      include: {
+        revisions: true,
+      },
       data: {
         revisions: {
           create: {
@@ -63,8 +78,24 @@ router.put("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: true, message: error })
   }
+})
 
-  console.log(req.body)
+router.put("/restore/:id", async (req, res) => {
+  const { id } = req.params
+  if (!id) res.status(400).json({ error: true, message: "id is required" })
+
+  try {
+    const revision = await prisma.revision.update({
+      where: { id: Number(id) },
+      data: {
+        updatedAt: new Date(),
+      },
+    })
+
+    res.json(revision)
+  } catch (error) {
+    res.status(500).json({ error: true, message: error })
+  }
 })
 
 // router.put("/publish/:id", async (req, res) => {

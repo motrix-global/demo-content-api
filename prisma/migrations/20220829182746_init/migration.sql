@@ -1,0 +1,17 @@
+-- CreateTable
+CREATE TABLE "Content" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "published" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" DATETIME
+);
+
+-- CreateTable
+CREATE TABLE "Revision" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "body" TEXT,
+    "contentId" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Revision_contentId_fkey" FOREIGN KEY ("contentId") REFERENCES "Content" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
