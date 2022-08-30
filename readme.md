@@ -3,14 +3,14 @@
 ### Requisitos mínimos
 Node e NPM
 ### Instalação
-Clone o repositório, entre no diretório com `cd demo-content-api` e rode
+Clone o repositório, entre no diretório com `cd demo-content-api` e rode    
 ```npm i```
 
-Após a instalação, as _migrations_ devem ser rodadas pelo comando
+Após a instalação, as _migrations_ devem ser rodadas pelo comando    
 ```npm run migrate```
 
 ### Execução
-Para abrir o servidor de desenvolvimento
+Para abrir o servidor de desenvolvimento    
 ```npm run dev```
 
 ### Postman Collection
