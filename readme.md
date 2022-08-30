@@ -18,6 +18,7 @@ Para abrir o servidor de desenvolvimento, digite
 ```
 npm run dev
 ```
+Por padrão, a api ficará disponível pela url `http://localhost:3000`
 ### Documentação dos endpoints
 https://documenter.getpostman.com/view/12093074/VUxLx91m
 

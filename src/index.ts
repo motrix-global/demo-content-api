@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv"
+dotenv.config()
+
 import express from "express"
 import content from "./route/content"
 import revision from "./route/revision"
@@ -11,6 +14,8 @@ app.use(bodyParser.json())
 app.use("/", content)
 app.use("/revision", revision)
 
-app.listen(3000, () =>
-  console.log("Demo Content API is running at http://localhost:3000")
+const port = process.env.API_PORT || 3000
+
+app.listen(port, () =>
+  console.log(`Demo Content API is running at http://localhost:${port}`)
 )
