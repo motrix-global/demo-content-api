@@ -2,13 +2,13 @@
 
 ### Requisitos mínimos
 Node e NPM
-### Instalação e migrations
+### Instalação e preparação
 Clone o repositório, entre no diretório com `cd demo-content-api` e instale as dependências com o comando
 ```
 npm install
 ```
 
-Após a instalação, as _migrations_ devem ser rodadas para que o banco de dados seja criado
+Após a instalação, as _migrations_ devem ser rodadas para que o banco de dados seja preparado
  ```
  npm run migrate
  ```
