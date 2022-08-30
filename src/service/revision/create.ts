@@ -10,7 +10,11 @@ const createRevision = async (req: any) => {
   const content = await prisma.content.update({
     where: { id: Number(id) },
     include: {
-      revisions: true,
+      revisions: {
+        orderBy: {
+          updatedAt: "desc",
+        },
+      },
     },
     data: {
       revisions: {

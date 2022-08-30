@@ -5,6 +5,8 @@ import getContent from "../service/content/get"
 import listContent from "../service/content/list"
 import publishContent from "../service/content/publish"
 import deleteContent from "../service/content/delete"
+import getLatestRevision from "../service/content/latest"
+import getRevisions from "../service/content/all"
 
 const router = Router()
 
@@ -43,6 +45,26 @@ router.get("/", async (req, res) => {
     const content = await listContent(req)
 
     res.json(content)
+  } catch (error) {
+    res.status(400).json({ error: true, message: error })
+  }
+})
+
+router.get(`/:id/latest`, async (req, res) => {
+  try {
+    const revision = await getLatestRevision(req)
+
+    res.json(revision)
+  } catch (error) {
+    res.status(400).json({ error: true, message: error })
+  }
+})
+
+router.get(`/:id/revisions`, async (req, res) => {
+  try {
+    const revision = await getRevisions(req)
+
+    res.json(revision)
   } catch (error) {
     res.status(400).json({ error: true, message: error })
   }
