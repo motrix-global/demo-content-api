@@ -1,14 +1,8 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "../service/prisma"
 import { Router } from "express"
 
 const router = Router()
-const prisma = new PrismaClient()
 
-/**
- * Restore revision from a given id
- * @method PUT
- * @path /revision/restore/:id
- */
 router.put("/restore/:id", async (req, res) => {
   const { id } = req.params
   if (!id) res.status(400).json({ error: true, message: "id is required" })
