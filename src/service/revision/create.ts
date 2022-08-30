@@ -1,4 +1,4 @@
-import prisma from "./prisma"
+import prisma from "../prisma"
 
 const createRevision = async (req: any) => {
   const { id } = req.params

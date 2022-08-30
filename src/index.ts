@@ -1,10 +1,13 @@
 import express from "express"
 import content from "./route/content"
 import revision from "./route/revision"
+import bodyParser from "body-parser"
 
 const app = express()
 
 app.use(express.json())
+app.use(bodyParser.json())
+
 app.use("/", content)
 app.use("/revision", revision)
 
