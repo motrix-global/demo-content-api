@@ -3,11 +3,6 @@ import { prismaMock } from "../singleton"
 
 describe("Get all revisions", () => {
   it("Should retrieve a paginated array of revision from a given id", async () => {
-    const request = {
-      params: { id: 1 },
-      query: {},
-    }
-
     const revisions = [
       {
         id: 1,
@@ -19,6 +14,11 @@ describe("Get all revisions", () => {
     ]
 
     prismaMock.revision.findMany.mockResolvedValue(revisions)
+
+    const request = {
+      params: { id: 1 },
+      query: {},
+    }
 
     const response = await getRevisions(request)
     const expected = {
