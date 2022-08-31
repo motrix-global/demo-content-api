@@ -1,15 +1,15 @@
 import prisma from "../prisma"
 
-const publishContent = async (req: any) => {
+const unpublishContent = async (req: any) => {
   const { id } = req.params
   if (!id) throw new Error("id is required")
 
   const content = await prisma.content.update({
     where: { id: Number(id) },
-    data: { published: true },
+    data: { published: false },
   })
 
   return content
 }
 
-export default publishContent
+export default unpublishContent

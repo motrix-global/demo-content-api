@@ -7,87 +7,45 @@ import publishContent from "../service/content/publish"
 import deleteContent from "../service/content/delete"
 import getLatestRevision from "../service/content/latest"
 import getRevisions from "../service/content/all"
+import unpublishContent from "../service/content/unpublish"
+import handleRequest from "../service/handleRequest"
 
 const router = Router()
 
-router.post(`/`, async (req, res) => {
-  try {
-    const content = await createContent(req)
-
-    res.json(content)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.post(`/`, (req, res) => {
+  handleRequest(req, res, createContent)
 })
 
-router.post("/:id", async (req, res) => {
-  try {
-    const content = await createRevision(req)
-
-    res.json(content)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.post("/:id", (req, res) => {
+  handleRequest(req, res, createRevision)
 })
 
-router.get(`/:id`, async (req, res) => {
-  try {
-    const content = await getContent(req)
-
-    res.json(content)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.get(`/:id`, (req, res) => {
+  handleRequest(req, res, getContent)
 })
 
-router.get("/", async (req, res) => {
-  try {
-    const content = await listContent(req)
-
-    res.json(content)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.get("/", (req, res) => {
+  handleRequest(req, res, listContent)
 })
 
-router.get(`/:id/latest`, async (req, res) => {
-  try {
-    const revision = await getLatestRevision(req)
-
-    res.json(revision)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.get(`/:id/latest`, (req, res) => {
+  handleRequest(req, res, getLatestRevision)
 })
 
-router.get(`/:id/revisions`, async (req, res) => {
-  try {
-    const revision = await getRevisions(req)
-
-    res.json(revision)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.get(`/:id/revisions`, (req, res) => {
+  handleRequest(req, res, getRevisions)
 })
 
-router.put("/publish/:id", async (req, res) => {
-  try {
-    const content = await publishContent(req)
-
-    res.json(content)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.put("/publish/:id", (req, res) => {
+  handleRequest(req, res, publishContent)
 })
 
-router.delete(`/:id`, async (req, res) => {
-  try {
-    const content = await deleteContent(req)
+router.put("/unpublish/:id", (req, res) => {
+  handleRequest(req, res, unpublishContent)
+})
 
-    res.json(content)
-  } catch (error) {
-    res.status(400).json({ error: true, message: error })
-  }
+router.delete(`/:id`, (req, res) => {
+  handleRequest(req, res, deleteContent)
 })
 
 export default router
