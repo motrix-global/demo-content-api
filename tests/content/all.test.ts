@@ -21,9 +21,13 @@ describe("Get all revisions", () => {
     }
 
     const response = await getRevisions(request)
-    const expected = {
-      id: 1,
-    }
-    expect(response).toEqual(expected)
+    const expected = [      {
+        id: 1,
+        body: null,
+        contentId: 1,
+        createdAt: expect.any(Date),
+        updatedAt: expect.any(Date),
+      }]
+    expect(response).toMatchObject(expected)
   })
 })

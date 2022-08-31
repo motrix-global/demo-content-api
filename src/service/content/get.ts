@@ -3,11 +3,11 @@ import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
 const getContent = async (request: any) => {
-  const id = requireId(request)
+  const id: number = requireId(request)
   const pagination = paginate(request)
 
   const content = await prisma.content.findFirst({
-    where: { id: Number(id) },
+    where: { id: id },
     include: {
       revisions: {
         orderBy: {
