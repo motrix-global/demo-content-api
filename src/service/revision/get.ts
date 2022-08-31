@@ -1,10 +1,11 @@
+import { Revision } from "@prisma/client"
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
-const getRevision = async (request: any) => {
+const getRevision = async (request: any): Promise<Revision | null> => {
   const id = requireId(request)
 
-  const content = await prisma.revision.findFirst({
+  const content: Revision | null = await prisma.revision.findFirst({
     where: { id: Number(id) },
   })
 

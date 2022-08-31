@@ -1,10 +1,11 @@
+import { Content } from "@prisma/client"
 import paginate from "../common/paginate"
 import prisma from "../common/prisma"
 
-const listContent = async (request: any) => {
+const listContent = async (request: any): Promise<Array<Content>> => {
   const pagination = paginate(request)
 
-  const content = await prisma.content.findMany({
+  const content: Array<Content> = await prisma.content.findMany({
     include: {
       revisions: {
         orderBy: {
