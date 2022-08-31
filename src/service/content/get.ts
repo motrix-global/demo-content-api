@@ -1,8 +1,10 @@
+import paginate from "../common/paginate"
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
 const getContent = async (req: any) => {
   const id = requireId(req)
+  const pagination = paginate(req)
 
   const content = await prisma.content.findFirst({
     where: { id: Number(id) },
@@ -11,6 +13,7 @@ const getContent = async (req: any) => {
         orderBy: {
           updatedAt: "desc",
         },
+        ...pagination,
       },
     },
   })

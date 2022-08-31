@@ -1,10 +1,12 @@
+import paginate from "../common/paginate"
 import prisma from "../common/prisma"
+import requireBody from "../common/requireBody"
 import requireId from "../common/requireId"
 
 const createRevision = async (req: any) => {
   const id = requireId(req)
-  const { body } = req.body
-  if (!!body) throw new Error("a 'body' property is required in request body")
+  const body = requireBody(req)
+  const pagination = paginate(req)
 
   const content = await prisma.content.update({
     where: { id: Number(id) },
@@ -13,6 +15,7 @@ const createRevision = async (req: any) => {
         orderBy: {
           updatedAt: "desc",
         },
+        ...pagination,
       },
     },
     data: {
