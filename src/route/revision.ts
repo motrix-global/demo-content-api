@@ -5,8 +5,8 @@ import restoreRevision from "../service/revision/restore"
 
 const router = Router()
 
-router.put("/restore/:id", async (req, res) => {
-  await handleRequest(req, res, restoreRevision)
+router.put("/restore/:id", (req, res) => {
+  handleRequest(req, res, restoreRevision)
 })
 
 router.get("/:id", (req, res) => {

@@ -1,15 +1,16 @@
-import paginate from "../common/paginate"
+import { paginate, Pagination } from "../common/paginate"
 import prisma from "../common/prisma"
 import requireBody from "../common/requireBody"
 import requireId from "../common/requireId"
 
 const createRevision = async (request: any) => {
-  const id = requireId(request)
+  const id: number = requireId(request)
+  const pagination: Pagination = paginate(request)
   const body = requireBody(request)
-  const pagination = paginate(request)
 
+  const count = await prisma.revision.count({ where: { contentId: id } })
   const content = await prisma.content.update({
-    where: { id: Number(id) },
+    where: { id: id },
     include: {
       revisions: {
         orderBy: {
@@ -27,7 +28,7 @@ const createRevision = async (request: any) => {
     },
   })
 
-  return content
+  return { data: content, count: count }
 }
 
 export default createRevision

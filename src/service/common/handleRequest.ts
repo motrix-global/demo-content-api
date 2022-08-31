@@ -1,8 +1,8 @@
 const handleRequest = async (request: any, response: any, callback: any) => {
   try {
-    const content = await callback(request)
+    const { data, count } = await callback(request)
 
-    response.json(content)
+    response.set("X-Total-Count", count).json(data)
   } catch (error: any) {
     response
       .status(500)

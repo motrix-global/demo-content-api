@@ -1,8 +1,9 @@
 import { Content } from "@prisma/client"
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
+import ResponseData from "../common/responseData"
 
-const deleteContent = async (request: any): Promise<Content> => {
+const deleteContent = async (request: any): Promise<ResponseData> => {
   const id: number = requireId(request)
 
   const content: Content = await prisma.content.update({
@@ -12,7 +13,7 @@ const deleteContent = async (request: any): Promise<Content> => {
     },
   })
 
-  return content
+  return { data: content, count: 1 }
 }
 
 export default deleteContent

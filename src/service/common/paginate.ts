@@ -1,9 +1,17 @@
-const paginate = (request: any) => {
-  const { take, skip } = request.query
+interface Pagination {
+  skip: number
+  take: number
+}
 
-  const pagination = { take: Number(take) || 20, skip: Number(skip) || 0 }
+const paginate = (request: any): Pagination => {
+  const { perPage, page } = request.query
+
+  const skip = Number(perPage) * Number(page)
+  const take = Number(perPage)
+
+  const pagination: Pagination = { take: take || 20, skip: skip || 0 }
 
   return pagination
 }
 
-export default paginate
+export { paginate, Pagination }
