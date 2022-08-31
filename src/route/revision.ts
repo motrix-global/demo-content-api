@@ -1,5 +1,5 @@
 import { Router } from "express"
-import handleRequest from "../service/handleRequest"
+import handleRequest from "../service/common/handleRequest"
 import getRevision from "../service/revision/get"
 import restoreRevision from "../service/revision/restore"
 
@@ -9,8 +9,8 @@ router.put("/restore/:id", async (req, res) => {
   await handleRequest(req, res, restoreRevision)
 })
 
-router.get("/:id", async (req, res) => {
-  await handleRequest(req, res, getRevision)
+router.get("/:id", (req, res) => {
+  handleRequest(req, res, getRevision)
 })
 
 export default router

@@ -1,8 +1,7 @@
-import prisma from "../prisma"
+import prisma from "../common/prisma"
 
 const createContent = async (req: any) => {
   const { title } = req.body
-
   if (!title) throw new Error("'title' property is required in request body")
 
   const content = await prisma.content.create({

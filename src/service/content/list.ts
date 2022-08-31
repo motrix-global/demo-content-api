@@ -1,4 +1,4 @@
-import prisma from "../prisma"
+import prisma from "../common/prisma"
 
 const listContent = async (req: any) => {
   const content = await prisma.content.findMany({

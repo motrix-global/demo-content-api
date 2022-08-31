@@ -8,7 +8,7 @@ import deleteContent from "../service/content/delete"
 import getLatestRevision from "../service/content/latest"
 import getRevisions from "../service/content/all"
 import unpublishContent from "../service/content/unpublish"
-import handleRequest from "../service/handleRequest"
+import handleRequest from "../service/common/handleRequest"
 
 const router = Router()
 

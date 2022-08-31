@@ -1,8 +1,8 @@
-import prisma from "../prisma"
+import prisma from "../common/prisma"
+import requireId from "../common/requireId"
 
 const restoreRevision = async (req: any) => {
-  const { id } = req.params
-  if (!id) throw new Error("id is required")
+  const id = requireId(req)
 
   const revision = await prisma.revision.update({
     where: { id: Number(id) },

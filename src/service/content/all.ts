@@ -1,11 +1,14 @@
-import prisma from "../prisma"
+import prisma from "../common/prisma"
+import requireId from "../common/requireId"
 
 const getRevisions = async (req: any) => {
-  const { id } = req.params
-  if (!id) throw new Error("id is required")
+  const id = requireId(req)
 
+  const { take, skip } = req.query
   const content = await prisma.revision.findMany({
     where: { contentId: Number(id) },
+    take: Number(take) || 20,
+    skip: Number(skip) || undefined,
     orderBy: {
       updatedAt: "desc",
     },

@@ -1,11 +1,10 @@
-import prisma from "../prisma"
+import prisma from "../common/prisma"
+import requireId from "../common/requireId"
 
 const createRevision = async (req: any) => {
-  const { id } = req.params
+  const id = requireId(req)
   const { body } = req.body
-
-  if (!id) throw new Error("id is required")
-  if (!body) throw new Error("a 'body' property is required in request body")
+  if (!!body) throw new Error("a 'body' property is required in request body")
 
   const content = await prisma.content.update({
     where: { id: Number(id) },
