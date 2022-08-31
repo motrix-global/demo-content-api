@@ -3,7 +3,7 @@ import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
 const getRevision = async (request: any): Promise<Revision | null> => {
-  const id = requireId(request)
+  const id: number = requireId(request)
 
   const content: Revision | null = await prisma.revision.findFirst({
     where: { id: Number(id) },

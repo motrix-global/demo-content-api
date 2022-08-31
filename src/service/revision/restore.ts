@@ -3,7 +3,7 @@ import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
 const restoreRevision = async (request: any): Promise<Revision> => {
-  const id = requireId(request)
+  const id: number = requireId(request)
 
   const revision: Revision = await prisma.revision.update({
     where: { id: Number(id) },

@@ -1,10 +1,10 @@
-import paginate from "../common/paginate"
+import { paginate, Pagination } from "../common/paginate"
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
 const getContent = async (request: any) => {
   const id: number = requireId(request)
-  const pagination = paginate(request)
+  const pagination: Pagination = paginate(request)
 
   const content = await prisma.content.findFirst({
     where: { id: id },

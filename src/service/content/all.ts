@@ -1,13 +1,13 @@
 import { Revision } from "@prisma/client"
-import paginate from "../common/paginate"
+import { paginate, Pagination } from "../common/paginate"
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
 const getRevisions = async (request: any): Promise<Array<Revision>> => {
   const id = requireId(request)
-  const pagination = paginate(request)
+  const pagination: Pagination = paginate(request)
 
-  const content: Array<Revision> = await prisma.revision.findMany({
+  const revisions: Array<Revision> = await prisma.revision.findMany({
     where: { contentId: Number(id) },
     ...pagination,
     orderBy: {
@@ -15,7 +15,7 @@ const getRevisions = async (request: any): Promise<Array<Revision>> => {
     },
   })
 
-  return content
+  return revisions
 }
 
 export default getRevisions
