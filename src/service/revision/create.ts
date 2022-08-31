@@ -8,8 +8,9 @@ const createRevision = async (request: any) => {
   const pagination: Pagination = paginate(request)
   const body = requireBody(request)
 
+  const count = await prisma.revision.count({ where: { contentId: id } })
   const content = await prisma.content.update({
-    where: { id: Number(id) },
+    where: { id: id },
     include: {
       revisions: {
         orderBy: {
@@ -27,7 +28,7 @@ const createRevision = async (request: any) => {
     },
   })
 
-  return content
+  return { data: content, count: count }
 }
 
 export default createRevision

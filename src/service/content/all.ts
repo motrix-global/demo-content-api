@@ -2,11 +2,16 @@ import { Revision } from "@prisma/client"
 import { paginate, Pagination } from "../common/paginate"
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
+import ResponseData from "../common/responseData"
 
-const getRevisions = async (request: any): Promise<Array<Revision>> => {
+const getRevisions = async (request: any): Promise<ResponseData> => {
   const id = requireId(request)
   const pagination: Pagination = paginate(request)
 
+  const count: number =
+    (await prisma.revision.count({
+      where: { contentId: Number(id) },
+    })) || 1
   const revisions: Array<Revision> = await prisma.revision.findMany({
     where: { contentId: Number(id) },
     ...pagination,
@@ -15,7 +20,7 @@ const getRevisions = async (request: any): Promise<Array<Revision>> => {
     },
   })
 
-  return revisions
+  return { data: revisions, count: count }
 }
 
 export default getRevisions

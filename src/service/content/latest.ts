@@ -1,8 +1,9 @@
 import { Revision } from "@prisma/client"
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
+import ResponseData from "../common/responseData"
 
-const getLatestRevision = async (request: any): Promise<Revision | null> => {
+const getLatestRevision = async (request: any): Promise<ResponseData> => {
   const id: number = requireId(request)
 
   const content: Revision | null = await prisma.revision.findFirst({
@@ -12,7 +13,7 @@ const getLatestRevision = async (request: any): Promise<Revision | null> => {
     },
   })
 
-  return content
+  return { data: content, count: 1 }
 }
 
 export default getLatestRevision
