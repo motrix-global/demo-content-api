@@ -1,8 +1,8 @@
 const requireTitle = (request: any) => {
-  const { id } = request.params
-  if (!id || isNaN(id)) throw new Error("id is required and must be an integer")
+  const { title } = request.body
+  if (!title) throw new Error("a title is required in request body")
 
-  return id
+  return title
 }
 
 export default requireTitle

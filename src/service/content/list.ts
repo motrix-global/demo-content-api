@@ -10,12 +10,14 @@ const listContent = async (request: any) => {
         orderBy: {
           updatedAt: "desc",
         },
-        ...pagination,
+        take: 1,
+        skip: 0,
       },
     },
     where: {
       deletedAt: null,
     },
+    ...pagination,
   })
 
   return content
