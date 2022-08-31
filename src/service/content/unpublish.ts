@@ -1,8 +1,8 @@
 import prisma from "../common/prisma"
 import requireId from "../common/requireId"
 
-const unpublishContent = async (req: any) => {
-  const id = requireId(req)
+const unpublishContent = async (request: any) => {
+  const id = requireId(request)
 
   const content = await prisma.content.update({
     where: { id: Number(id) },

@@ -1,8 +1,8 @@
 import paginate from "../common/paginate"
 import prisma from "../common/prisma"
 
-const listContent = async (req: any) => {
-  const pagination = paginate(req)
+const listContent = async (request: any) => {
+  const pagination = paginate(request)
 
   const content = await prisma.content.findMany({
     include: {

@@ -1,10 +1,10 @@
-const handleRequest = async (req: any, res: any, callback: any) => {
+const handleRequest = async (request: any, response: any, callback: any) => {
   try {
-    const content = await callback(req)
+    const content = await callback(request)
 
-    res.json(content)
+    response.json(content)
   } catch (error: any) {
-    res
+    response
       .status(500)
       .json({ error: true, message: error.message || "Internal server error" })
   }
