@@ -28,3 +28,5 @@ https://documenter.getpostman.com/view/12093074/VUxLx91m
 ### Roadmap
 - Testes unitários
 - Melhorias na documentação
+- - Explicar paginação
+- - Adicionar descrição de cada endpoint
