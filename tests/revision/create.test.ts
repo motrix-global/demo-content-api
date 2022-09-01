@@ -2,17 +2,17 @@ import createRevision from "../../src/service/revision/create"
 import { mockRequest } from "../mockRequest"
 import { prismaMock } from "../singleton"
 
-describe("Get all revisions", () => {
-  it("Should retrieve content from a given id", async () => {
+describe("Create revision", () => {
+  it("Should create a new revision on a content from a given id", async () => {
     const now = new Date()
     const content = {
-      id: 2,
+      id: 1,
       title: "Título do conteúdo",
       published: false,
       deletedAt: null,
       revisions: [
         {
-          id: 26,
+          id: 1,
           body: "Corpo do conteúdo",
           contentId: 1,
           createdAt: now,
@@ -21,6 +21,7 @@ describe("Get all revisions", () => {
       ],
     }
 
+    prismaMock.revision.count.mockResolvedValue(1)
     prismaMock.content.update.mockResolvedValue(content)
 
     const request = mockRequest()
@@ -35,7 +36,7 @@ describe("Get all revisions", () => {
         deletedAt: null,
         revisions: [
           {
-            id: 26,
+            id: 1,
             body: "Corpo do conteúdo",
             contentId: 1,
             createdAt: now,
