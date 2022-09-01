@@ -1,26 +1,26 @@
 import { Content } from "@prisma/client"
-import createContent from "../../src/service/content/create"
+import getContent from "../../src/service/content/get"
 import { mockRequest } from "../mockRequest"
 import { prismaMock } from "../singleton"
 
 describe("Get all revisions", () => {
-  it("Should retrieve content from a given id", async () => {
+  it("Should create a new content and return it", async () => {
     const content: Content = {
-      id: 2,
+      id: 1,
       title: "Título do conteúdo",
       published: false,
       deletedAt: null,
     }
 
-    prismaMock.content.create.mockResolvedValue(content)
+    prismaMock.content.findFirst.mockResolvedValue(content)
 
     const request = mockRequest()
 
-    const response = await createContent(request)
+    const response = await getContent(request)
     const expected = {
       count: 1,
       data: {
-        id: 2,
+        id: 1,
         title: "Título do conteúdo",
         published: false,
         deletedAt: null,
