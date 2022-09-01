@@ -6,14 +6,14 @@ import ResponseData from "../common/responseData"
 const getLatestRevision = async (request: any): Promise<ResponseData> => {
   const id: number = requireId(request)
 
-  const content: Revision | null = await prisma.revision.findFirst({
+  const revision: Revision | null = await prisma.revision.findFirst({
     where: { contentId: Number(id) },
     orderBy: {
       updatedAt: "desc",
     },
   })
 
-  return { data: content, count: 1 }
+  return { data: revision, count: 1 }
 }
 
 export default getLatestRevision
