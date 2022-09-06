@@ -1,5 +1,5 @@
 import { Router } from "express"
-import createRevision from "../service/revision/create"
+import updateContent from "../service/revision/create"
 import createContent from "../service/content/create"
 import getContent from "../service/content/get"
 import listContent from "../service/content/list"
@@ -16,8 +16,9 @@ router.post(`/`, (req, res) => {
   handleRequest(req, res, createContent)
 })
 
+// TODO: mudar para put
 router.post("/:id", (req, res) => {
-  handleRequest(req, res, createRevision)
+  handleRequest(req, res, updateContent)
 })
 
 router.get(`/:id`, (req, res) => {
@@ -36,10 +37,12 @@ router.get(`/:id/revisions`, (req, res) => {
   handleRequest(req, res, getRevisions)
 })
 
+// TODO: mudar para post
 router.put("/publish/:id", (req, res) => {
   handleRequest(req, res, publishContent)
 })
 
+// TODO: mudar para post
 router.put("/unpublish/:id", (req, res) => {
   handleRequest(req, res, unpublishContent)
 })
