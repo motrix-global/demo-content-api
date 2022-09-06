@@ -1,15 +1,16 @@
 import { Content } from "@prisma/client"
+import { Request } from "express"
 import { paginate, Pagination } from "../common/paginate"
 import prisma from "../common/prisma"
 import ResponseData from "../common/responseData"
 
-const listContent = async (request: any): Promise<ResponseData> => {
+const listContent = async (request: Request): Promise<ResponseData> => {
   const pagination: Pagination = paginate(request)
 
-  const count: number =
-    (await prisma.content.count({
-      where: { deletedAt: null },
-    })) || 1
+  const count: number = await prisma.content.count({
+    where: { deletedAt: null },
+  })
+
   const content: Array<Content> = await prisma.content.findMany({
     include: {
       revisions: {
@@ -26,7 +27,7 @@ const listContent = async (request: any): Promise<ResponseData> => {
     ...pagination,
   })
 
-  return { data: content, count: count }
+  return { data: content, count }
 }
 
 export default listContent

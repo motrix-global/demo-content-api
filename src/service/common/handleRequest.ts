@@ -1,8 +1,19 @@
-const handleRequest = async (request: any, response: any, callback: any) => {
+import { Request, Response } from "express"
+import ResponseData from "./responseData"
+
+interface CallbackFunction {
+  (request: Request): Promise<ResponseData>
+}
+
+const handleRequest = async (
+  request: Request,
+  response: Response,
+  callback: CallbackFunction
+) => {
   try {
     const { data, count } = await callback(request)
 
-    response.set("X-Total-Count", count).json(data)
+    response.set("X-Total-Count", count.toString()).json(data)
   } catch (error: any) {
     response
       .status(500)

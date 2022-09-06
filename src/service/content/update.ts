@@ -1,14 +1,13 @@
-import { paginate, Pagination } from "../common/paginate"
+import { Request } from "express"
 import prisma from "../common/prisma"
 import requireBody from "../common/requireBody"
 import requireId from "../common/requireId"
+import ResponseData from "../common/responseData"
 
-const createRevision = async (request: any) => {
+const updateContent = async (request: Request): Promise<ResponseData> => {
   const id: number = requireId(request)
-  const pagination: Pagination = paginate(request)
   const body = requireBody(request)
 
-  const count = await prisma.revision.count({ where: { contentId: id } })
   const content = await prisma.content.update({
     where: { id: id },
     include: {
@@ -16,7 +15,8 @@ const createRevision = async (request: any) => {
         orderBy: {
           updatedAt: "desc",
         },
-        ...pagination,
+        skip: 0,
+        take: 1,
       },
     },
     data: {
@@ -28,7 +28,7 @@ const createRevision = async (request: any) => {
     },
   })
 
-  return { data: content, count: count }
+  return { data: content, count: 1 }
 }
 
-export default createRevision
+export default updateContent
