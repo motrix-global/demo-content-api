@@ -1,5 +1,4 @@
-import { Request } from "express"
-import createRevision from "../../src/service/revision/create"
+import updateContent from "../../src/service/content/update"
 import { mockRequest } from "../mockRequest"
 import { prismaMock } from "../singleton"
 
@@ -27,7 +26,7 @@ describe("Create revision", () => {
 
     const request = mockRequest()
 
-    const response = await createRevision(request)
+    const response = await updateContent(request)
     const expected = {
       count: 1,
       data: {

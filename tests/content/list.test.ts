@@ -4,8 +4,8 @@ import listContent from "../../src/service/content/list"
 import { mockRequest } from "../mockRequest"
 import { prismaMock } from "../singleton"
 
-describe("Get all revisions", () => {
-  it("Should create a new content and return it", async () => {
+describe("Get latest revision from content", () => {
+  it("Should return a content entry and it's latest revision", async () => {
     const result = [
       {
         id: 1,
@@ -22,7 +22,7 @@ describe("Get all revisions", () => {
 
     const response = await listContent(request)
     const expected = {
-      count: 1,
+      count: undefined,
       data: [
         {
           id: 1,

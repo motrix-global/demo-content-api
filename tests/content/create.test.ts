@@ -3,11 +3,13 @@ import createContent from "../../src/service/content/create"
 import { mockRequest } from "../mockRequest"
 import { prismaMock } from "../singleton"
 
-describe("Get all revisions", () => {
-  it("Should retrieve content from a given id", async () => {
+describe("Create a new content entry", () => {
+  it("Should create a new content entry with a given title", async () => {
+    const title = "Título do conteúdo"
+
     const content: Content = {
       id: 2,
-      title: "Título do conteúdo",
+      title: title,
       published: false,
       deletedAt: null,
     }
@@ -15,9 +17,17 @@ describe("Get all revisions", () => {
     prismaMock.content.create.mockResolvedValue(content)
 
     const request = mockRequest()
-
     const response = await createContent(request)
-    const expected = {
+
+    const expectedFindArgs = {
+      data: {
+        title,
+      },
+    }
+
+    expect(prismaMock.content.create).toHaveBeenCalledWith(expectedFindArgs)
+
+    const expectedResponse = {
       count: 1,
       data: {
         id: 2,
@@ -26,6 +36,7 @@ describe("Get all revisions", () => {
         deletedAt: null,
       },
     }
-    expect(response).toMatchObject(expected)
+
+    expect(response).toMatchObject(expectedResponse)
   })
 })

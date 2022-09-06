@@ -3,8 +3,8 @@ import getLatestRevision from "../../src/service/content/latest"
 import { mockRequest } from "../mockRequest"
 import { prismaMock } from "../singleton"
 
-describe("Get all revisions", () => {
-  it("Should create a new content and return it", async () => {
+describe("Get latest revision", () => {
+  it("Should return latest revision", async () => {
     const revision: Revision = {
       id: 1,
       body: "Corpo de exemplo",

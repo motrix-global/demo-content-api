@@ -24,8 +24,8 @@ describe("Get all revisions", () => {
 
     const contentId = 1
     const request = mockRequest(contentId)
-
     const response = await getRevisions(request)
+
 
     const expectedFindArgs = {
       where: {
@@ -45,6 +45,7 @@ describe("Get all revisions", () => {
       count,
       data: revisions,
     }
+
     expect(response).toEqual(expecteResponse)
   })
 
