@@ -45,6 +45,7 @@ describe("Get all revisions", () => {
       count,
       data: revisions,
     }
+    
     expect(response).toEqual(expecteResponse)
   })
 
