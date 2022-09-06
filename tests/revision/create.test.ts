@@ -1,3 +1,4 @@
+import { Request } from "express"
 import createRevision from "../../src/service/revision/create"
 import { mockRequest } from "../mockRequest"
 import { prismaMock } from "../singleton"
