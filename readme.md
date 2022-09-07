@@ -27,7 +27,9 @@ https://documenter.getpostman.com/view/12093074/VUxLx91m
 
 ### Paginação
 A paginação é feita através dos parâmetros de busca de uma URL. A quantidade de resultados a serem mostradas é definida pelo parâmetro `perPage` e a página atual pelo parâmetro `page`, começando pela posição `0`, como uma array.    
-Por exemplo, para buscar a terceira página com 5 resultados, o caminho final da URL deve ficar: 
-```/<endpoint>?perPage=5&page=2```
+Por exemplo, para buscar a terceira página com 5 resultados, o caminho final da URL deve ficar:    
+```
+/<endpoint>?perPage=5&page=2
+```
 
 Para obeter a contagem total de resultados, o header `X-Total-Count` da resposta da API pode ser consultado.
