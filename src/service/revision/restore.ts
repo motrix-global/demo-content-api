@@ -7,15 +7,22 @@ import ResponseData from "../common/responseData"
 const restoreRevision = async (request: Request): Promise<ResponseData> => {
   const id: number = requireId(request)
 
-  // TODO: criar nova revisão com o mesmo conteúdo
-  const revision: Revision = await prisma.revision.update({
+  const oldRevision: Revision | null = await prisma.revision.findFirst({
     where: { id: Number(id) },
-    data: {
-      updatedAt: new Date(),
-    },
   })
 
-  return { data: revision, count: 1 }
+  if (oldRevision) {
+    const revision: Revision = await prisma.revision.create({
+      data: {
+        body: oldRevision.body,
+        contentId: oldRevision.contentId,
+      },
+    })
+
+    return { data: revision, count: 1 }
+  }
+
+  throw new Error("Revision not found")
 }
 
 export default restoreRevision
